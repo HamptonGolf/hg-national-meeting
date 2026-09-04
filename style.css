@@ -1,388 +1,226 @@
-  :root{
-    --ink: #0a0d0b;
-    --ink-soft: #10140f;
-    --surface: #141a13;
-    --surface-line: rgba(245,247,242,0.10);
-    --pine: #006600;
-    --fairway: #00b451;
-    --paper: #f4f6f2;
-    --mist: #93a599;
-    --mist-dim: #5d6c62;
-    --radius: 2px;
-    --wrap: 1180px;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>National Meeting — HG</title>
+<link rel="icon" type="image/png" href="assets/logos/Trello-Preview.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-  @font-face{
-    font-family:'Akzidenz Grotesk';
-    src:url('assets/fonts/AkzidenzGrotesk-Medium.otf') format('opentype');
-    font-weight:500;
-    font-style:normal;
-    font-display:swap;
-  }
+<!--
+  ============================================================
+  HAMPTON GOLF — NATIONAL MEETING VIDEO HUB
+  ============================================================
+  HOW TO ADD VIDEOS
+  ------------------------------------------------------------
+  Each video tile below is a <div class="reel-card"> containing
+  a <video class="reel-video">. To activate a tile:
 
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
+    1. Drop your video file wherever this HTML lives, e.g. /videos/
+    2. Find the matching <source> line (currently commented out)
+    3. Uncomment it and set the real src, e.g.:
+         <source src="videos/state-of-hg-2026.mp4" type="video/mp4">
+    4. Save + refresh. The placeholder frame disappears on its own
+       once the browser can play the file — no other edits needed.
 
-  body{
-    margin:0;
-    background:var(--ink);
-    color:var(--paper);
-    font-family:'Akzidenz Grotesk', 'Manrope', sans-serif;
-    -webkit-font-smoothing:antialiased;
-    line-height:1.5;
-  }
+  FEATURE reels (.reel-card[data-kind="feature"]) load with
+  controls, no autoplay — for videos shown live on the big screen.
 
-  h1,h2,h3{
-    font-family:'Akzidenz Grotesk', 'Space Grotesk', sans-serif;
-    margin:0;
-    letter-spacing:-0.01em;
-  }
+  LOOP reels (.reel-card[data-kind="loop"]) autoplay muted + loop —
+  built for lobby/break-room screens running unattended.
 
-  a{ color:inherit; }
+  Recommended: 16:9, H.264 .mp4, under ~50MB where possible for
+  fast loading on venue wifi.
+  ============================================================
+-->
 
-  .wrap{
-    max-width:var(--wrap);
-    margin:0 auto;
-    padding-left:32px;
-    padding-right:32px;
-  }
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
-  }
+  <header class="topbar">
+    <div class="topbar-inner">
+      <img class="hg-logo" src="assets/logos/HG_logo_RGB_no_url_300.png" alt="Hampton Golf">
+      <div class="topbar-tag">200 Story Rd, Ocoee, FL</div>
+    </div>
+  </header>
 
-  /* ---------- topbar ---------- */
-  .topbar{
-    position:relative;
-    background:rgba(10,13,11,0.86);
-    backdrop-filter:blur(10px);
-    border-bottom:3px solid transparent;
-    border-image:linear-gradient(90deg, var(--pine), var(--fairway)) 1;
-  }
-  .topbar-inner{
-    max-width:var(--wrap);
-    margin:0 auto;
-    padding:18px 32px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-  }
-  .hg-logo{
-    height:26px;
-    width:auto;
-    display:block;
-    animation:fadeInLeft 0.6s ease both;
-    animation-delay:0s;
-}
-  .topbar-tag{
-    font-size:14px;
-    color:var(white);
-    font-weight:500;
-    text-align:right;
-    animation:fadeInRight 0.6s ease both;
-    animation-delay:0.15s;
-  }
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="badge-ring">
+        <div class="badge-glow"></div>
+        <div class="badge-spin"></div>
+          <div class="badge-plate">
+            <img class="badge-img" src="assets/logos/Trello-Preview.png" alt="This year's theme mark: Powered by Systems, Driven by People">
+          </div>
+      </div>
 
-  /* ---------- hero ---------- */
-  .hero{
-    position:relative;
-    padding:70px 0 80px;
-    overflow:hidden;
-    background:
-      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(0,180,81,0.14), transparent 60%),
-      var(--ink);
-  }
-  .hero-inner{
-    position:relative;
-    text-align:center;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-  }
+      <h1 class="hero-title">National Meeting<small>Tuesday, January 26 & Wednesday, January 27</small></h1>
 
-  .badge-ring{
-    position:relative;
-    width:320px;
-    height:320px;
-    margin-bottom:36px;
-    animation:fadeInUp 0.8s ease both;
-    animation-delay:0.3s;
-  }
-  .badge-glow{
-    position:absolute;
-    inset:-42px;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(0,180,81,0.30), transparent 70%);
-    filter:blur(6px);
-  }
-.badge-spin{
-    position:absolute;
-    inset:0;
-    border-radius:50%;
-    background:conic-gradient(from 0deg, var(--fairway) 0deg, var(--pine) 90deg, var(--fairway) 180deg, var(--pine) 270deg, var(--fairway) 360deg);
-    animation:spin 6s linear infinite;
-    will-change:transform;
-}
- .badge-plate{
-    position:absolute;
-    inset:13px;
-    border-radius:50%;
-    overflow:hidden;
-    background:var(--paper);
-    box-shadow:0 18px 50px rgba(0,0,0,0.5);
-}
-.badge-plate img.badge-img{
-    width:100%;
-    height:100%;
-    display:block;
-    object-fit:cover;
-}
-  @keyframes spin{
-    from{ transform:rotate(0deg); }
-    to{ transform:rotate(360deg); }
-  }
-  @keyframes fadeInUp{
-    from{ opacity:0; transform:translateY(14px); }
-    to{ opacity:1; transform:translateY(0); }
-  }
-    @keyframes fadeInLeft{
-    from{ opacity:0; transform:translateX(-14px); }
-    to{ opacity:1; transform:translateX(0); }
-  }
-  @keyframes fadeInRight{
-    from{ opacity:0; transform:translateX(14px); }
-    to{ opacity:1; transform:translateX(0); }
-  }
-  .badge-caption{
-    margin-top:14px;
-    font-size:12.5px;
-    color:var(--mist-dim);
-    letter-spacing:0.02em;
-  }
+      <div class="hero-meta">
+        <div>Sysco Conference Center <i></i> 2027 National Meeting</div>
+      </div>
+    </div>
+  </section>
 
-  .hero-title{
-    font-size:clamp(40px, 6.4vw, 74px);
-    font-weight:700;
-    line-height:1.02;
-    color:var(--paper);
-    animation:fadeInUp 0.8s ease both;
-    animation-delay:0.45s;
-  }
-  .hero-title small{
-    display:block;
-    font-size:0.52em;
-    font-weight:600;
-    color:var(--fairway);
-    margin-top:6px;
-  }
+  <div class="cut"></div>
 
-  .hero-copy{
-    max-width:540px;
-    margin:26px auto 0;
-    font-size:16.5px;
-    color:var(--mist);
-  }
+<section class="reels">
+    <div class="wrap">
 
-  .hero-meta{
-    margin-top:38px;
-    display:flex;
-    gap:28px;
-    flex-wrap:wrap;
-    justify-content:center;
-    font-size:20px;
-    color:var(white);
-    padding-bottom: 90px;
-    animation:fadeInUp 0.8s ease both;
-    animation-delay:0.6s;
-  }
-  .hero-meta div{ display:flex; align-items:center; gap:8px; }
-  .hero-meta i{
-    width:5px; height:5px; border-radius:50%;
-    background:var(--fairway);
-    display:inline-block;
-    margin-right: 5px;
-    margin-left: 5px;
-  }
+      <div class="section-head">
+        <div>
+          <h2>Team Member Introductions</h2>
+        </div>
+      </div>
 
-  /* ---------- section divider ---------- */
-  .cut{
-    height:64px;
-    background:var(--surface);
-    border-top:3px solid transparent;
-    border-image:linear-gradient(90deg, var(--pine), var(--fairway)) 1;
-  }
+      <div class="feature-grid">
 
-  /* ---------- section shell ---------- */
-  section.reels{
-    background:var(--surface);
-    padding:8px 0 32px;
-  }
-  .section-head{
-    padding-top:20px;
-    padding-bottom:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:24px;
-    flex-wrap:wrap;
-    border-bottom:2px solid var(--pine);
-    margin-bottom:44px;
-  }
-  .section-head h2{
-    font-size:clamp(26px, 3.2vw, 36px);
-    color:var(--paper);
-  }
-  .section-head p{
-    max-width:380px;
-    font-size:14.5px;
-    color:var(--mist);
-    margin:10px 0 0;
-  }
-  .section-tally{
-    font-size:13px;
-    color:var(--mist-dim);
-    white-space:nowrap;
-    padding-bottom:6px;
-    font-variant-numeric:tabular-nums;
-  }
+        <article class="reel-card" data-kind="feature">
+          <div class="reel-frame">
+            <video class="reel-video" controls preload="metadata">
+              <!-- <source src="videos/state-of-hampton-golf-2026.mp4" type="video/mp4"> -->
+            </video>
+            <div class="reel-placeholder">
+              <span class="play-icon">▶</span>
+              <span class="placeholder-label">assets/videos/team-member-video.mp4</span>
+            </div>
+          </div>
+          <div class="reel-meta">
+            <h3>Team Member Video</h3>
+          </div>
+        </article>
 
-  /* ---------- feature grid ---------- */
-  .feature-grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:28px;
-  }
-  @media (max-width:900px){ .feature-grid{ grid-template-columns:1fr; } }
+    </div>
+  </section>
 
-  .reel-card{ display:flex; flex-direction:column; }
+  <section class="reels">
+    <div class="wrap">
 
-  .reel-frame{
-    position:relative;
-    aspect-ratio:16/9;
-    border-radius:var(--radius);
-    overflow:hidden;
-    background:var(--ink-soft);
-    border:1px solid var(--pine);
-  }
-  .reel-video{
-    width:100%; height:100%;
-    object-fit:cover;
-    display:none;
-    background:#000;
-  }
-  .reel-frame.has-video .reel-video{ display:block; }
-  .reel-frame.has-video .reel-placeholder{ display:none; }
+      <div class="section-head">
+        <div>
+          <h2>Vendor Sponsors</h2>
+        </div>
+      </div>
 
-  .reel-placeholder{
-    position:absolute; inset:0;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:14px;
-    background-image:
-      radial-gradient(rgba(245,247,242,0.07) 1px, transparent 1px);
-    background-size:14px 14px;
-  }
-  .play-icon{
-    width:52px; height:52px;
-    border-radius:50%;
-    background:rgba(0,180,81,0.12);
-    border:1px solid rgba(0,180,81,0.5);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--fairway);
-    font-size:16px;
-    transition:transform 0.25s ease, background 0.25s ease;
-  }
-  .reel-card[data-kind="loop"] .play-icon{
-    border-radius:6px;
-    width:40px; height:40px;
-  }
-  .reel-frame:hover .play-icon{
-    transform:scale(1.06);
-    background:rgba(0,180,81,0.2);
-  }
-  .placeholder-label{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:12px;
-    color:var(--mist);
-    letter-spacing:0.02em;
-  }
-  .placeholder-kicker{
-    font-size:10.5px;
-    color:var(--mist-dim);
-    text-transform:none;
-  }
+      <div class="feature-grid">
 
-  .kind-tag{
-    position:absolute;
-    top:12px;
-    left:12px;
-    font-size:10.5px;
-    padding:4px 9px;
-    border-radius:2px;
-    background:rgba(10,13,11,0.65);
-    border:1px solid var(--surface-line);
-    color:var(--mist);
-    backdrop-filter:blur(4px);
-  }
-  .reel-card[data-kind="loop"] .kind-tag{ color:var(--fairway); border-color:rgba(0,180,81,0.35); }
+        <article class="reel-card" data-kind="feature">
+          <div class="reel-frame">
+            <video class="reel-video" controls preload="metadata">
+              <!-- <source src="videos/state-of-hampton-golf-2026.mp4" type="video/mp4"> -->
+            </video>
+            <div class="reel-placeholder">
+              <span class="play-icon">▶</span>
+              <span class="placeholder-label">assets/videos/vendor-sponsors.mp4</span>
+            </div>
+          </div>
+          <div class="reel-meta">
+            <h3>Vendor Sponsor Video</h3>
+          </div>
+        </article>
 
-  .reel-meta{ padding-top:16px; }
-  .reel-meta h3{
-    font-size:20px;
-    font-weight:600;
-    color:var(--paper);
-    text-align: center;
-  }
-  .reel-meta p{
-    font-size:13.5px;
-    color:var(--mist);
-    margin:6px 0 0;
-    max-width:34ch;
-  }
+    </div>
+  </section>
 
-  /* ---------- loop strip ---------- */
-  .loop-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:22px;
-  }
-  @media (max-width:900px){ .loop-grid{ grid-template-columns:repeat(2, 1fr); } }
-  .loop-grid .reel-frame{ aspect-ratio:4/5; }
-  .loop-grid .reel-meta h3{ font-size:15px; }
-  .loop-grid .reel-meta p{ font-size:13px; }
+  <section class="reels">
+    <div class="wrap">
 
-  /* ---------- footer ---------- */
-  footer{
-    background:var(--ink);
-    border-top:3px solid transparent;
-    border-image:linear-gradient(90deg, var(--pine), var(--fairway)) 1;
-    padding:44px 0;
-  }
-  .footer-inner{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:14px;
-  }
-  .footer-tagline{
-    font-size:14px;
-    color:var(white);
-  }
-    .footer-event{
-    font-size:14px;
-    text-align:right;
-  }
-  .footer-link{
-    color:var(white);
-    text-decoration:none;
-    transition:color 0.2s ease;
-  }
-  .footer-link:hover{
-    color:var(--fairway);
-  }
+      <div class="section-head">
+        <div>
+          <h2>Club Properties</h2>
+        </div>
+      </div>
+
+      <div class="feature-grid">
+
+        <article class="reel-card" data-kind="feature">
+          <div class="reel-frame">
+            <video class="reel-video" controls preload="metadata">
+              <!-- <source src="videos/state-of-hampton-golf-2026.mp4" type="video/mp4"> -->
+            </video>
+            <div class="reel-placeholder">
+              <span class="play-icon">▶</span>
+              <span class="placeholder-label">assets/videos/club-property-video-1</span>
+            </div>
+          </div>
+          <div class="reel-meta">
+            <h3>Club Properties Video 1</h3>
+          </div>
+        </article>
+
+        <article class="reel-card" data-kind="feature">
+          <div class="reel-frame">
+            <video class="reel-video" controls preload="metadata">
+              <!-- <source src="videos/year-in-review.mp4" type="video/mp4"> -->
+            </video>
+            <div class="reel-placeholder">
+              <span class="play-icon">▶</span>
+              <span class="placeholder-label">assets/videos/club-property-video-2</span>
+            </div>
+          </div>
+          <div class="reel-meta">
+            <h3>Club Properties Video 2</h3>
+          </div>
+        </article>
+
+    </div>
+  </section>
+
+<section class="reels">
+    <div class="wrap">
+
+      <div class="section-head">
+        <div>
+          <h2>Club Team Members</h2>
+        </div>
+      </div>
+
+      <div class="feature-grid">
+
+        <article class="reel-card" data-kind="feature">
+          <div class="reel-frame">
+            <video class="reel-video" controls preload="metadata">
+              <!-- <source src="videos/state-of-hampton-golf-2026.mp4" type="video/mp4"> -->
+            </video>
+            <div class="reel-placeholder">
+              <span class="play-icon">▶</span>
+              <span class="placeholder-label">assets/videos/club-team-members-video-1.mp4</span>
+            </div>
+          </div>
+          <div class="reel-meta">
+            <h3>Club Team Members Video 1</h3>
+          </div>
+        </article>
+
+        <article class="reel-card" data-kind="feature">
+          <div class="reel-frame">
+            <video class="reel-video" controls preload="metadata">
+              <!-- <source src="videos/year-in-review.mp4" type="video/mp4"> -->
+            </video>
+            <div class="reel-placeholder">
+              <span class="play-icon">▶</span>
+              <span class="placeholder-label">assets/videos/club-team-members-video-2.mp4</span>
+            </div>
+          </div>
+          <div class="reel-meta">
+            <h3>Club Team Members Video 2</h3>
+          </div>
+        </article>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="footer-tagline">Powered by Systems. Driven by People.</div>
+      <div class="footer-event"><a class="footer-link" href="https://hampton.golf/" target="_blank" rel="noopener">About Us</a></div>
+    </div>
+  </footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
